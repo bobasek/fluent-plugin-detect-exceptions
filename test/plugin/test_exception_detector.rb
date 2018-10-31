@@ -241,6 +241,19 @@ END
   app/controllers/books_controller.rb:118:in `generror'
   config/error_reporting_logger.rb:62:in `tagged'
 END
+  RUBY_ESCAPED_EXC = <<END.freeze
+ NoMethodError (undefined method `resursivewordload' for #<BooksController:0x007f8dd9a0c738>):
+\\u0009app/controllers/books_controller.rb:69:in `recursivewordload'
+\\u0009app/controllers/books_controller.rb:75:in `loadword'
+\\u0009app/controllers/books_controller.rb:79:in `loadline'
+\\u0009app/controllers/books_controller.rb:83:in `loadparagraph'
+\\u0009app/controllers/books_controller.rb:87:in `loadpage'
+\\u0009app/controllers/books_controller.rb:91:in `onload'
+\\u0009app/controllers/books_controller.rb:95:in `loadrecursive'
+\\u0009app/controllers/books_controller.rb:99:in `requestload'
+\\u0009app/controllers/books_controller.rb:118:in `generror'
+\\u0009config/error_reporting_logger.rb:62:in `tagged'
+END
 
   # The whitespace on the second line is significant.
   # rubocop:disable TrailingWhitespace
@@ -561,6 +574,7 @@ END
   def test_ruby
     check_exception(RUBY_EXC, false)
     check_exception(RAILS_EXC, false)
+    check_exception(RUBY_ESCAPED_EXC, false)
   end
 
   def test_dart
